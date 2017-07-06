@@ -49,11 +49,9 @@ class LoginForm extends Component {
             onChangeText={this.onPasswordChange.bind(this)}
           />
         </CardSection>
-
         <Text style={styles.errorTextStyle}>
           {this.props.error}
         </Text>
-
         <CardSection>
           {this.renderButton()}
         </CardSection>
@@ -71,8 +69,7 @@ const styles = {
 };
 
 const mapStateToProps = ({ auth }) => {
-  const { email, password, error, loading } = auth;
-  
+  const { email, password, error, loading } = auth;  
   return { email, password, error, loading };
 };
 
