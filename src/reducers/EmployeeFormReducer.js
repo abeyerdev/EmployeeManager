@@ -1,4 +1,4 @@
-import { EMPLOYEE_UPDATE } from '../actions/types';
+import { EMPLOYEE_CREATE, EMPLOYEE_UPDATE } from '../actions/types';
 
 const INITIAL_STATE = {
   name: '',
@@ -8,6 +8,8 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case EMPLOYEE_CREATE:
+      return INITIAL_STATE;
     case EMPLOYEE_UPDATE:
       // payload will look like { prop: 'name', value: 'Adam' }
       // [ action.payload.prop ] is NOT referring to an array -> its key interpolation from ES6
