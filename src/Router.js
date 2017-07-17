@@ -3,6 +3,7 @@ import { Actions, Router, Scene } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
 import EmployeeList from './components/EmployeeList';
 import CreateEmployee from './components/CreateEmployee';
+import EditEmployee from './components/EditEmployee';
 
 // wrapping Scenes to restrict built in back/forward buttons to employee management and not auth
 const RouterComponent = () => {
@@ -21,6 +22,7 @@ const RouterComponent = () => {
           initial 
         />
         <Scene key="createEmployee" component={CreateEmployee} title="Create Employee" />
+        <Scene key="editEmployee" component={EditEmployee} title="Edit Employee" />
       </Scene>
     </Router>  
   );
