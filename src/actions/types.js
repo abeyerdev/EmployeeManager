@@ -6,4 +6,5 @@ export const LOGIN_USER_SUCCESS = 'login_user_success';
 
 export const GET_EMPLOYEES_SUCCESS = 'get_employees_success';
 export const EMPLOYEE_CREATE = 'employee_create';
+export const EMPLOYEE_SAVE_SUCCESS = 'employee_save_success';
 export const EMPLOYEE_UPDATE = 'employee_update';
