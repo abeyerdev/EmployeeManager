@@ -16,6 +16,19 @@ export const employeeCreate = ({ name, phone, shift }) => {
   };  
 };
 
+export const employeeDelete = ({ uid }) => {
+  const { currentUser } = firebase.auth();
+  return () => {
+    firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+      .remove()
+      .then(() => {
+        // don't need to dispatch anything since getEmployees action will keep our data up-to-date
+        // dispatch({ type: EMPLOYEE_DELETED });
+        Actions.employees({ type: 'reset' });
+      });
+  };
+};
+
 export const employeeSave = ({ name, phone, shift, uid }) => {
   const { currentUser } = firebase.auth();
 

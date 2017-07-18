@@ -2,16 +2,31 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { text } from 'react-native-communications';
-import { Button, Card, CardSection } from './common';
+import { Button, Card, CardSection, Confirm } from './common';
 import EmployeeForm from './EmployeeForm';
-import { employeeSave, employeeUpdate } from '../actions';
+import { employeeDelete, employeeSave, employeeUpdate } from '../actions';
 
 class EditEmployee extends Component {
+  state = { showModal: false };
+
   componentWillMount() {
     // Iterate over every property on incoming employee object, and update our reducer with every property.
     _.each(this.props.employee, (value, prop) => {      
       this.props.employeeUpdate({ prop, value });
     });
+  }
+
+  onAccept() {
+    const { uid } = this.props.employee;
+    this.props.employeeDelete({ uid });
+  }
+
+  onDecline() {
+    this.setState({ showModal: false });
+  }
+
+  onFirePress() {
+    this.setState({ showModal: !this.state.showModal });
   }
 
   onSavePress() {
@@ -39,6 +54,18 @@ class EditEmployee extends Component {
             Text Schedule
           </Button>
         </CardSection>
+        <CardSection>
+          <Button onPress={this.onFirePress.bind(this)}>
+            Fire Employee
+          </Button>
+        </CardSection>
+        <Confirm 
+          visible={this.state.showModal}
+          onYes={this.onAccept.bind(this)}
+          onNo={this.onDecline.bind(this)}
+        >
+          Are you sure you want to fire this employee?
+        </Confirm>  
       </Card>
     );
   }
@@ -49,4 +76,8 @@ const mapStateToProps = (state) => {
   return { name, phone, shift };
 };
 
-export default connect(mapStateToProps, { employeeUpdate, employeeSave })(EditEmployee);
+export default connect(mapStateToProps, { 
+  employeeDelete, 
+  employeeSave, 
+  employeeUpdate 
+})(EditEmployee);
